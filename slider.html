@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="assets/js/script.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Slider</title>
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        window.onload = function() {
+            let slides = [
+                {
+                    title: "Сиамская кошка",
+                    background: "public/images/siamskaya.jpg",
+                    link: "https://www.purina.ru/cats/cat-breeds/library/siamese"
+                }, {
+                    title: "Британская короткошерстная",
+                    background: "public/images/f36cc496802e10056b9bee7fa6114464.jpg",
+                    link: "https://www.purina.ru/cats/cat-breeds/library/british_shorthair"
+                }, {
+                    title: "Сфинкс",
+                    background:"public/images/Сфинкс.jpg",
+                    link: "https://www.purina.ru/cats/cat-breeds/library/sphynx"
+                }
+            ]
+            Slider.initSlider(slides);
+        };
+    </script>
+</head>
+<body>
+<header class="header"><p>
+    <img src="public/images/6.png" width="50" height="50"> </p> </header>
+<div class="container">
+    <main class="center column">
+        <article>
+            <h1>Slider</h1>
+            <p>
+            <div id="slider"></div>
+            <input id="butt1" class="buttons" type="button" value="Prev"/>
+            <input id="butt2" class="buttons" type="button" value="Next"/>
+            <input id="butt3" class="buttons" type="button" value="Hide"/>
+            <input id="butt4" class="buttons" type="button" value="Start"/>
+
+            <script>
+                index = 0;
+
+                function handler1() {
+                    Slider.prevSlide();
+                }
+                function handler2() {
+                    Slider.nextSlide();
+                }
+                function handler3(){
+                    if (index % 2 == 0) {
+                        document.getElementById("slider").style.display = "none";
+                        butt3.value = "Show";
+                    }
+                    else {
+                        document.getElementById("slider").style.display = 'block';
+                        butt3.value = "Hide";
+                    }
+                    index++;
+                }
+
+                butt1.addEventListener("click", handler1);
+                butt2.addEventListener("click", handler2);
+                butt3.addEventListener("click", handler3);
+                butt4.addEventListener('click', (event)=>{
+                    if (event.target.classList.contains('start')){
+                        event.target.innerHTML = 'Stop';
+                        butt4.value = 'Start';
+                        clearInterval(interval)
+                    } else {
+                        event.target.innerHTML = 'Start';
+                        butt4.value = 'Stop';
+                        interval = setInterval(()=>{
+                            Slider.nextSlide();
+                        },1000)
+                    }
+                    event.target.classList.toggle('start')
+                })
+
+            </script>
+            </p>
+
+            <p id = "rrr">
+
+            </p>
+        </article>
+    </main>
+    <nav class="left column">
+        <h3>Links</h3>
+        <ul>
+            <li><a href="contact.html">Contact </a></li>
+            <li><a href="table.html">Table</a></li>
+            <li><a href="slider.html">Slider</a></li>
+            <li><a href="media.html">Media</a></li>
+        </ul>
+    </nav>
+    <div class="right column">
+        <h3>Right heading</h3>
+        <p></p>
+    </div>
+    <div class="push"></div>
+
+</div>
+<div class="footer-wrapper">
+    <footer class="footer"><p><img src="public/images/6.png" width="50" height="50">  </p></footer>
+</div>
+</body>
+</html>
